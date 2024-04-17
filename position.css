@@ -1,0 +1,48 @@
+@charset "UTF-8";
+.container-fluid{
+	display:flex;
+	
+	align-items:center;
+	position:relative;
+	width: 100%;
+	
+	
+	
+}
+
+body .container-fluid #moneyInput1,
+body .container-fluid #drinksList1,
+body .container-fluid button1 {
+    margin: 1;
+}
+
+body .container-fluid #moneyInput1 {
+    margin-right: 8px;
+}
+
+body .container-fluid #drinksList1 {
+    max-width: 200px;
+    width: 180px;
+}
+
+.drinkoption label{pointer-events:none;}
+
+#container1 p,
+#container5 p{
+	
+	font-size:20px;
+
+}
+#result5 p{
+	
+	font-size:16px;
+}
+
+#change5{
+	
+	font-size:16px;
+}
+
+#drinkList5 label{
+	
+	font-size:15px;}

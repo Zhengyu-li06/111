@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device=width,initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="position.css">
+</head>
+
+<body>
+     <div id="container1">
+      <div id ="star1">
+               <p><strong>課題1</strong></p>
+     </div>
+     
+               <div id ="star2">
+               <p><strong>課題2</strong></p>
+     </div>
+     
+     </div>
+     
+     <script>
+          let element1 = document.getElementById("star1");
+          let element2 = document.getElementById("star2");
+          
+          let star1_html = '<span>★</span>';
+          let star2_html = '<span>☆</span>';
+          
+          for (let i=0;i<5;i++){
+          element1.insertAdjacentHTML("beforeend",star1_html);
+          }
+          
+        	  for (let j=0;j<5;j++){
+        		  
+        	   if (j % 2 === 0){
+        	  
+        	  element2.insertAdjacentHTML("beforeend", star2_html+star1_html+star2_html+star1_html+star2_html+'<br>');
+          } 
+        	   else {
+        	  element2.insertAdjacentHTML("beforeend", star1_html+star2_html+star1_html+star2_html+star1_html+'<br>');
+        }
+          
+      }
+          
+        
+      </script>
+     
+      <p style="font-size:20px"><strong>課題3</strong></p>
+      
+         <div class="container-fluid">
+
+        <label for="moneyInput1">お金入れる</label>
+        <input type="number" id="moneyInput1" placeholder="金額">
+
+         <div id="drinksList1">
+            
+            <select id="drinkSelector1">
+                <option value="drink1" data-drink-name="コーヒー">コーヒー (￥150)</option>
+                <option value="drink2" data-drink-name="お茶">お茶 (￥130)</option>
+                <option value="drink3" data-drink-name="オレンジジュース">オレンジジュース (￥160)</option>
+                <option value="drink4" data-drink-name="水">水 (￥100)</option>
+            </select>
+        </div>
+
+        <button onclick="buyDrink1()">購入</button>
+        </div>
+
+        <div id="result1">
+            
+            <p id="purchaseStatus1"></p>
+            <p id="change1"></p>
+        </div>
+    
+<div id="container5">
+    
+    <p><strong>発展</strong></p>
+     <div>
+            <label for="moneyInput5">お金入れる</label>
+            <input type="number" id="moneyInput5" placeholder="金额">
+        </div>
+
+        <div id="drinksList5">
+           
+            <input type="radio" name="drink5" id="drink1" class="drinkoption" value="drink1" data-name="コーヒー" data-price="150">
+            <label for="drink1">コーヒー(￥150)</label>
+
+            <input type="radio" name="drink5" id="drink2" class="drinkoption" value="drink2" data-name="お茶" data-price="130">
+            <label for="drink2">お茶(￥130)</label>
+
+            <input type="radio" name="drink5" id="drink3" class="drinkoption" value="drink3" data-name="オレンジジュース" data-price="160">
+            <label for="drink3">オレンジジュース(￥160)</label>
+
+            <input type="radio" name="drink5" id="drink4" class="drinkoption" value="drink4" data-name="水" data-price="100">
+            <label for="drink4">水(￥100)</label>
+        </div>
+
+        <button onclick="buyDrink5()">購入</button>
+
+        <div id="result5">
+        
+            <p id="purchaseStatus5"></p>
+            <p id="change5"></p>
+        </div>
+    </div>
+  <script>
+        function buyDrink1() {
+            let money = parseFloat(document.getElementById("moneyInput1").value);
+            let drinkSelector = document.getElementById("drinkSelector1");
+            let selectedDrink = drinkSelector.options[drinkSelector.selectedIndex].value;
+            let drinkName = drinkSelector.options[drinkSelector.selectedIndex].getAttribute("data-drink-name");
+            let drinkPrices = {
+                drink1: 150,
+                drink2: 130,
+                drink3: 160,
+                drink4: 100
+            };
+
+            if (money >= drinkPrices[selectedDrink]) {
+                document.getElementById("purchaseStatus1").innerText = drinkName + "を購入しました。";
+                let change = money - drinkPrices[selectedDrink];
+                document.getElementById("change1").innerText = "お釣りは" + Math.floor(change) + "円です";
+            } else {
+                document.getElementById("purchaseStatus1").innerText = "お金が足りません";
+                document.getElementById("change1").innerText = "";
+            }
+        }
+
+
+        window.onload = function () {
+            document.getElementById("moneyInput5").addEventListener("input", disableSelectedOption5);
+            document.getElementById("purchaseButton5").addEventListener("click", buyDrink5);
+        }
+
+        function disableSelectedOption5() {
+            let money = parseFloat(document.getElementById("moneyInput5").value);
+            let drinkOptions = document.querySelectorAll('input[name="drink5"]');
+            
+            drinkOptions.forEach(function(option) {
+                if (money < parseFloat(option.getAttribute("data-price"))) {
+                    option.setAttribute("disabled", "disabled");
+                    option.checked = false;
+                } else {
+                    option.removeAttribute("disabled");
+                }
+            });
+        }
+           
+        function buyDrink5() {
+        	console.log("Function called");
+            let money = parseFloat(document.getElementById("moneyInput5").value);
+            let selectedOption5 = document.querySelector('input[name="drink5"]:checked');
+
+            if (selectedOption5) {
+                let drinkName = selectedOption5.getAttribute("data-name");
+                let drinkPrice = parseFloat(selectedOption5.getAttribute("data-price"));
+
+                if (money >= drinkPrice) {
+                    document.getElementById("purchaseStatus5").innerText = drinkName + "を購入しました。";
+                    let change = money - drinkPrice;
+                    document.getElementById("change5").innerText = "お釣りは" + Math.floor(change) + "円です";
+                } }}
+               
+    </script>
+            
+
+</body>
+</html>
